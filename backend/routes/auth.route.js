@@ -79,7 +79,7 @@
 // export default router;
 
 import express from "express";
-import { signup, login } from "../controllers/auth.controller.js";
+import { signup, login } from "../controllers/auth.contorller.js";
 
 const router = express.Router();
 
