@@ -35,7 +35,7 @@ const CreatePage = () => {
 		
 
 		}
-		navigate("/");
+		navigate("/home");
 		setNewProduct({ name: "", price: "", image: "" });
 	};
 
