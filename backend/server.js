@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
-import mongoose from 'mongoose';
+import mongoose from 'mongoose';          
 import productRoutes from "./routes/product.route.js";
 import authRoutes from "./routes/auth.route.js";
 
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://smart-product-store-2.onrender.com"
+    "https://smart-product-store-1.onrender.com"
   ],
   credentials: true
 }));
