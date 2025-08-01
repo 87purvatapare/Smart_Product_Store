@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const BACKEND_URL = "https://smart-product-store-1.onrender.com";
+const BACKEND_URL = "https://smart-product-store-1.onrender.com/";
 
 export const useProductStore = create((set) => ({
 	products: [],
