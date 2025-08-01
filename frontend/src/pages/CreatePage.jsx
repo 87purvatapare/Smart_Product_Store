@@ -1,6 +1,4 @@
 
-
-
 import { Box, Button, Container, Heading, Input, useColorModeValue, useToast, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import { useProductStore } from "../store/product";
@@ -13,6 +11,7 @@ const CreatePage = () => {
 		price: "",
 		image: "",
 	});
+	//added
 	const toast = useToast();
      const navigate = useNavigate();
 	const { createProduct } = useProductStore();
