@@ -1,10 +1,9 @@
 
-
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "http://localhost:5000/api", // ✅ only one /api
-  withCredentials: true,
+  baseURL: "https://mern-stack-project-l99d.onrender.com/api", 
+  withCredentials: true, // optional (for cookies/auth)
 });
 
 export default instance;
