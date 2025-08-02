@@ -1,9 +1,9 @@
 
 import axios from "axios";
 
-const instance = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL, 
-  withCredentials: true, // optional (for cookies/auth)
+const axios = Axios.create({
+  baseURL: "https://mern-stack-project-l99d.onrender.com/api",
+  withCredentials: true,
 });
 
 export default instance;
