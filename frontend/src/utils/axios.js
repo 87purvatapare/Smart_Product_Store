@@ -1,8 +1,9 @@
-// src/utils/axios.js
+
+
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL, // Change if needed
+  baseURL: "http://localhost:5000/api", // ✅ only one /api
   withCredentials: true,
 });
 

@@ -1,111 +1,10 @@
-// import { create } from "zustand";
-
-// const BACKEND_URL = "https://smart-product-store-1.onrender.com";
-
-// export const useProductStore = create((set) => ({
-// 	products: [],
-// 	setProducts: (products) => set({ products }),
-
-// 	createProduct: async (newProduct) => {
-// 		if (!newProduct.name || !newProduct.image || !newProduct.price) {
-// 			return { success: false, message: "Please fill in all fields." };
-// 		}
-// 		try {
-// 			const res = await fetch(`${BACKEND_URL}/api/products`, {
-// 				method: "POST",
-// 				headers: {
-// 					"Content-Type": "application/json",
-// 				},
-// 				body: JSON.stringify(newProduct),
-// 			});
-// 			const data = await res.json();
-// 			set((state) => ({ products: [...state.products, data.data] }));
-// 			return { success: true, message: "Product created successfully" };
-// 		} catch (error) {
-// 			console.error("Create error:", error);
-// 			return { success: false, message: "Server error while creating product." };
-// 		}
-// 	},
-
-// 	fetchProducts: async () => {
-// 		try {
-// 			const res = await fetch(`${BACKEND_URL}/api/products`);
-// 			const data = await res.json();
-// 			set({ products: data.data });
-// 		} catch (error) {
-// 			console.error("Fetch error:", error);
-// 			set({ products: [] });
-// 		}
-// 	},
-
-// 	deleteProduct: async (pid) => {
-// 		try {
-// 			const res = await fetch(`${BACKEND_URL}/api/products/${pid}`, {
-// 				method: "DELETE",
-// 			});
-// 			const data = await res.json();
-// 			if (!data.success) return { success: false, message: data.message };
-
-// 			set((state) => ({
-// 				products: state.products.filter((product) => product._id !== pid),
-// 			}));
-// 			return { success: true, message: data.message };
-// 		} catch (error) {
-// 			console.error("Delete error:", error);
-// 			return { success: false, message: "Server error while deleting product." };
-// 		}
-// 	},
-
-// 	updateProduct: async (pid, updatedProduct) => {
-// 		try {
-// 			const res = await fetch(`${BACKEND_URL}/api/products/${pid}`, {
-// 				method: "PUT",
-// 				headers: {
-// 					"Content-Type": "application/json",
-// 				},
-// 				body: JSON.stringify(updatedProduct),
-// 			});
-// 			const data = await res.json();
-// 			if (!data.success) return { success: false, message: data.message };
-
-// 			set((state) => ({
-// 				products: state.products.map((product) =>
-// 					product._id === pid ? data.data : product
-// 				),
-// 			}));
-// 			return { success: true, message: data.message };
-// 		} catch (error) {
-// 			console.error("Update error:", error);
-// 			return { success: false, message: "Server error while updating product." };
-// 		}
-// 	},
-// }));
-
 import { create } from "zustand";
 
-const BACKEND_URL = "https://smart-product-store-1.onrender.com";
+const BACKEND_URL = "http://localhost:5000"; // Use your local backend URL
 
 export const useProductStore = create((set) => ({
   products: [],
   setProducts: (products) => set({ products }),
-
-  fetchProducts: async () => {
-    try {
-      const res = await fetch(`${BACKEND_URL}/api/products`);
-      const data = await res.json();
-
-      if (!data.success) {
-        console.error("Fetch failed:", data.message);
-        set({ products: [] });
-        return;
-      }
-
-      set({ products: data.data });
-    } catch (error) {
-      console.error("Fetch error:", error.message);
-      set({ products: [] });
-    }
-  },
 
   createProduct: async (newProduct) => {
     if (!newProduct.name || !newProduct.image || !newProduct.price) {
@@ -122,19 +21,23 @@ export const useProductStore = create((set) => ({
       });
 
       const data = await res.json();
-
-      if (!data.success) {
-        return { success: false, message: data.message || "Failed to create product" };
-      }
-
-      set((state) => ({
-        products: [...state.products, data.data],
-      }));
+      set((state) => ({ products: [...state.products, data.data] }));
 
       return { success: true, message: "Product created successfully" };
     } catch (error) {
-      console.error("Create error:", error.message);
+      console.error("Create error:", error);
       return { success: false, message: "Server error while creating product." };
+    }
+  },
+
+  fetchProducts: async () => {
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/products`);
+      const data = await res.json();
+      set({ products: data.data });
+    } catch (error) {
+      console.error("Fetch error:", error);
+      set({ products: [] });
     }
   },
 
@@ -150,9 +53,10 @@ export const useProductStore = create((set) => ({
       set((state) => ({
         products: state.products.filter((product) => product._id !== pid),
       }));
+
       return { success: true, message: data.message };
     } catch (error) {
-      console.error("Delete error:", error.message);
+      console.error("Delete error:", error);
       return { success: false, message: "Server error while deleting product." };
     }
   },
@@ -166,8 +70,8 @@ export const useProductStore = create((set) => ({
         },
         body: JSON.stringify(updatedProduct),
       });
-      const data = await res.json();
 
+      const data = await res.json();
       if (!data.success) return { success: false, message: data.message };
 
       set((state) => ({
@@ -175,9 +79,10 @@ export const useProductStore = create((set) => ({
           product._id === pid ? data.data : product
         ),
       }));
+
       return { success: true, message: data.message };
     } catch (error) {
-      console.error("Update error:", error.message);
+      console.error("Update error:", error);
       return { success: false, message: "Server error while updating product." };
     }
   },
