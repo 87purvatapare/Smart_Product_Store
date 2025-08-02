@@ -2,7 +2,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: "https://mern-stack-project-l99d.onrender.com/api", 
+  baseURL: import.meta.env.VITE_BACKEND_URL, 
   withCredentials: true, // optional (for cookies/auth)
 });
 
