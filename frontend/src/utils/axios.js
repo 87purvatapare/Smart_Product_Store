@@ -1,7 +1,7 @@
 
 import axios from "axios";
 
-const axios = Axios.create({
+const axios = axios.create({
   baseURL: "https://mern-stack-project-l99d.onrender.com/api",
   withCredentials: true,
 });
