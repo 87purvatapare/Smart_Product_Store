@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
-const BACKEND_URL = "http://localhost:5000"; // Use your local backend URL
+const BACKEND_URL = "http://localhost:5000/api"; // Use your local backend URL
+
 
 export const useProductStore = create((set) => ({
   products: [],
